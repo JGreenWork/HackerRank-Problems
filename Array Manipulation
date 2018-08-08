@@ -1,0 +1,81 @@
+#Array Manipulation
+#Python3
+#The two commented out chunks of code are my attempt at solving this before reading the discussion.
+#After reading the discussion, I implimented the O(N) time solution presented there.
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the arrayManipulation function below.
+def arrayManipulation(n, queries):
+    new_array = [0]*n
+    max, sum = 0, 0
+    
+    for inner_list in queries:
+        left_pos = inner_list[0]-1
+        right_pos = inner_list[1]
+        add_this = inner_list[2]
+        
+        new_array[left_pos] += add_this
+        if right_pos < n:
+            new_array[right_pos] -= add_this
+    
+    for num in new_array:
+        sum += num
+        if sum > max:
+            max = sum
+    
+    return max
+        
+    
+    
+    '''my_dict = {}
+    
+    for i in range(0, n):
+        my_dict[i] = 0
+        
+    for inner_list in queries:
+        left_pos = inner_list[0]-1
+        right_pos = inner_list[1]
+        add_this = inner_list[2]
+        for i in range(left_pos, right_pos):
+            my_dict[i]+=add_this
+    my_list = list(my_dict.values())
+    return max(my_list)
+
+    new_array = [0]*n
+    
+    for inner_list in queries:
+        left_pos = inner_list[0]-1
+        right_pos = inner_list[1]
+        add_this = inner_list[2]
+        for i in range(left_pos, right_pos):
+            new_array[i] += add_this
+            if max < new_array[i]:
+                max = new_array[i]
+    return max'''            
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nm = input().split()
+
+    n = int(nm[0])
+
+    m = int(nm[1])
+
+    queries = []
+
+    for _ in range(m):
+        queries.append(list(map(int, input().rstrip().split())))
+
+    result = arrayManipulation(n, queries)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
