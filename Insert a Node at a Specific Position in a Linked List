@@ -1,0 +1,27 @@
+#Insert a Node at a Specific Position in a Linked List
+#Python3
+
+# Complete the insertNodeAtPosition function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+def insertNodeAtPosition(head, data, position):
+    temp_ptr = head
+    new_node_ptr = SinglyLinkedListNode(data)
+    count = 0
+    
+    if head is None:
+        return new_node_ptr
+    else:
+        while count < position-1:
+            temp_ptr = temp_ptr.next
+            count+=1
+        new_node_ptr.next = temp_ptr.next
+        temp_ptr.next = new_node_ptr
+        return head
